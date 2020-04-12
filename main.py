@@ -1,6 +1,7 @@
 import pygame
 import sys 
 import time
+import pygbutton
 pygame.init()
 
 WIDTH_OF_SCREEN=1000
@@ -13,7 +14,7 @@ gray=(123, 131, 173)
 white=(255,255,255)
 gray=(128,130,128)
 black=(0,0,0)
-button_color=(100,100,100)
+button_color=(36,160,237)
 
 
 
@@ -32,7 +33,7 @@ def gameloop():
         for event in pygame.event.get():
            
             Display.fill(gray)
-            b.DrawBoard()
+            
             
             
 
@@ -40,7 +41,7 @@ def gameloop():
                 game_over=True
 
 
-        
+        b.DrawBoard()
         pygame.display.update()
     pygame.quit()
     quit()
@@ -64,6 +65,18 @@ class Board:
         self.HEIGHT=HEIGHT
         self.MARGIN=MARGIN
         self.SIZE_OF_BLOCK=SIZE_OF_BLOCK
+
+    
+    def text_to_button(self,msg,color,buttonx,buttony,buttonwidth,buttonheight,size="small"):
+        textSurf,textRect= self.text_objects(msg,color,size)
+        textRect.center=((buttonx+(buttonwidth/2)),buttony+(buttonheight/2))
+        Display.blit(textSurf,textRect)
+
+    def text_objects(self,msg,color,size="small"):
+        textSurface=Display_font.render(msg,True,color)
+        return textSurface,textSurface.get_rect()
+
+        
         
     def DrawBoard(self):
         
@@ -83,6 +96,18 @@ class Board:
                 cnt+=1    
 
         pygame.draw.aaline(Display,white,(700,0),(700,2000))
+
+        ''' Button '''
+
+        Button_start=pygame.draw.rect(Display,white,(250,750,170,50))
+        
+        self.text_to_button("Start",button_color,250,750,170,50)
+        
+        
+
+
+
+    
 
       
         
