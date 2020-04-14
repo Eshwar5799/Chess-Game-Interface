@@ -2,10 +2,18 @@ import pygame
 import sys 
 import time
 import pygbutton
+import random
+
+from players import Moves
 pygame.init()
+
+
+clock = pygame.time.Clock()
 
 WIDTH_OF_SCREEN=1000
 HEIGHT_OF_SCREEN=2000
+
+
 
 Display=pygame.display.set_mode((WIDTH_OF_SCREEN,HEIGHT_OF_SCREEN))
 pygame.display.set_caption("A Chess Game")
@@ -16,7 +24,10 @@ gray=(128,130,128)
 black=(105,105,105)
 button_color=(36,160,237)
 
+''' Random '''
 
+
+    
 
 
 font_style = pygame.font.SysFont("bahnschrift", 25)
@@ -30,6 +41,7 @@ def gameloop():
     
     
     while not game_over:
+        
         for event in pygame.event.get():
            
             Display.fill(gray)
@@ -103,12 +115,25 @@ class Board:
         '''start button'''
         self.text_to_button("Start",button_color,250,750,170,50)
 
+        '''Black'''
+        self.text_to_button("Black",black, 250 ,650 ,170,50)
+
+        '''White'''
+        self.text_to_button("White",white, 250,10,170,50)
+
+        '''Out '''
+        self.text_to_button("Out",white, 750,10,170,50)
+
         ''' White players '''
 
         Images.loadImageWhite(self)
 
         ''' Black players '''
         Images.loadImageBlack(self)
+
+
+        '''Functionality'''
+
 
         
         
@@ -126,11 +151,30 @@ class Images:
 
             Difference of 60 is good
         '''
+       
         Wrook=pygame.image.load("./Images/wrook.png")
         Display.blit(Wrook,(55,50))
 
+        
+        
+
+        
+
+
         Wknight=pygame.image.load("./Images/wknight.png")
         Display.blit(Wknight,(115,50))
+
+        possibleNextMove=[]
+        
+        possibleNextMove=Moves.Knight(self,0,1)
+        '''
+        self.text_to_button("Choose from {} {}" .format(possibleNextMove[0],possibleNextMove[1])
+        , button_color,760,90,170,50)
+        position=()
+        position=possibleNextMove[0]
+        
+        Display.blit(Wknight,(115*position[1],50*position[0]))
+        '''
 
         Wbishop=pygame.image.load("./Images/wbishop.png")
         Display.blit(Wbishop,(180,50))
@@ -160,6 +204,7 @@ class Images:
 
         Brook=pygame.image.load("./Images/brook.png")
         Display.blit((Brook),(55,575))
+        
 
         Bknight=pygame.image.load("./Images/bknight.png")
         Display.blit((Bknight),(120,575))
@@ -189,7 +234,18 @@ class Images:
             Bpawn=pygame.image.load("./Images/bpawn.png")
             Display.blit(Bpawn,((24+PawnDistanceBlack)*i,510))
 
+        
+    
+    
 
+
+    
+
+
+
+
+
+        
 
 
 
